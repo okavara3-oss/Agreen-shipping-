@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قائمة مراجعة تعليمات الشحن | أجـرين</title>
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#17212b;--muted:#667085;--line:#d9e0e7;--accent:#176b55;--accent2:#e5f4ef}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.65}
+header{background:#123d34;color:white;padding:22px 16px}header .wrap,main{max-width:1000px;margin:auto}h1{font-size:24px;margin:0 0 5px}header p{margin:0;color:#d6e8e2;font-size:14px}
+main{padding:18px 14px 50px}.controls,.section,.summary{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px #132b3710}
+label{font-weight:700;display:block;margin-bottom:7px}select,input[type=search]{width:100%;padding:12px;border:1px solid #bcc7d1;border-radius:9px;background:#fff;color:var(--ink);font:inherit}
+.toprow{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}.summary{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.meter{height:9px;background:#e5eaf0;border-radius:20px;overflow:hidden;margin-top:9px}.meter span{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+h2{font-size:18px;margin:0 0 12px}.section h2{color:#174f42}.item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #edf0f3}.item:last-child{border-bottom:0}.item input{width:20px;height:20px;flex:0 0 auto;margin-top:4px;accent-color:var(--accent)}.item.done .txt{color:#697586;text-decoration:line-through}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button{border:0;border-radius:9px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer}.primary{background:var(--accent);color:white}.secondary{background:#e8edf1;color:#273746}.danger{background:#fff0ee;color:#a33327}.small{font-size:13px;color:var(--muted)}.empty{padding:18px;text-align:center;color:var(--muted)}
+@media(max-width:650px){.toprow{grid-template-columns:1fr}h1{font-size:21px}.summary{align-items:flex-start;flex-direction:column}}
+@media print{body{background:white}.controls,.actions{display:none}.section,.summary{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>قائمة مراجعة تعليمات الشحن</h1><p>شركة مصر الخضراء (أجرين) — WI-7-9-15</p></div></header>
+<main>
+<div class="controls">
+ <div class="toprow">
+  <div><label for="country">اختار الدولة أو نوع تعليمات العميل</label><select id="country"><option value="__all">كل الدول / كل التعليمات الخاصة</option></select></div>
+  <div><label for="search">بحث داخل التعليمات</label><input id="search" type="search" placeholder="اكتب كلمة للبحث..."></div>
+ </div>
+ <div class="summary"><div><strong id="progressText">تم تنفيذ 0 من 0</strong><div class="small" id="remainingText">المتبقي: 0</div><div class="meter"><span id="meter"></span></div></div><div class="actions" style="margin:0"><button class="secondary" id="resetView">إلغاء تحديد القائمة الظاهرة</button><button class="secondary" onclick="window.print()">طباعة</button></div></div>
+ <p class="small">الاختيارات محفوظة تلقائياً على نفس المتصفح والجهاز. إذا فتحت الملف على جهاز آخر فلن تنتقل العلامات إليه تلقائياً.</p>
+</div>
+<div id="checklists"></div>
+<div class="section"><p class="small">ملاحظة: تم تنظيم البنود اعتماداً على ملف تعليمات الشحن المرفق. راجع التعليمات الأصلية عند وجود أي تعارض أو حالة استثنائية.</p><div class="actions"><button class="danger" id="clearAll">مسح جميع العلامات المحفوظة</button></div></div>
+</main>
+<script>
+const DATA = {"general": [{"title": "أولاً: مراجعة بيان الشحن والتجهيز", "items": ["مراجعة رقم الأوردر، كود العميل، الدولة، الصنف، براند الكرتونة، ومتطلبات العميل الخاصة (النوتس).", "مراجعة رقم اللوط وكود المزرعة ومطابقتهما مع طلب الفحص إن وجد.", "مراجعة نسب الأحجام في الحاوية.", "مراجعة جميع الموافقات الخاصة بتعديل التحميل: براند الكرتونة، نسب الأحجام، أو إجمالي عدد البالتات.", "للدول التي تحتاج معاملة تبريد (مثل الصين والفلبين واليابان): مراجعة بروتوكول الدولة والتأكيد مع رئيس قسم التحميل.", "إرسال النسخة المعتمدة من بيان التحميل بعد المراجعة مع رئيس القسم ومدير الجودة إلى جروب جودة الشحن والتحميل."]}, {"title": "ثانياً: فحص واستلام الحاوية قبل التحميل", "items": ["التأكد من مطابقة تخصيص الحاوية لبيان الشحن المعتمد.", "التأكد من نظافة الحاوية وغسلها بالصابون والماء والكلورين وعدم وجود روائح غريبة.", "فحص الحاوية من الداخل والخارج: عدم وجود تسريب هواء أو ضوء، وجود الصفاية وفبرة موزع الهواء، عدم وجود استيكرات أو ملصقات على الجدران، وسلامة الأبواب والجلد والهيكل.", "التأكد من سلامة عمل وحدة التبريد.", "ضبط فتحة التهوية على 15 ووضع استيكر Safety Seal.", "ضبط Setpoint حسب الصنف: الليمون حسب تأكيد مدير الجودة، عدا البنوز على 4°م؛ المندارين 3°م؛ البرتقال الصيفي والبلدي والسالستيانا 2°م؛ البرتقال البسرة والشاموتي 3°م.", "عند عدم وجود صفاية: إبلاغ جروب اللوجيستيك ووضع فويل ألومنيوم أو صفاية مناسبة لتصريف المياه، وتصوير الحالة وانتظار الموافقة بالتحميل.", "عند وجود لحامات تؤثر على سلامة المنتج: تصويرها وإبلاغ اللوجيستيك وإيقاف التحميل ورفض الحاوية.", "عند وجود لحامات صيانة لا تؤثر على سلامة المنتج: تصويرها وإبلاغ اللوجيستيك قبل التحميل؛ وإذا وُجد شك في التسريب، لا يتم التحميل حتى حل المشكلة والحصول على الموافقة.", "عند وجود ثقوب بالأرضية لا تؤثر على سلامة المنتج: تصويرها وإبلاغ اللوجيستيك وسدها بالسيليكون.", "عند عدم مطابقة Setpoint أو فتحة التهوية: تصوير الحالة وطلب التأكيد من اللوجيستيك، وعدم التحميل قبل الموافقة حيث تنص التعليمات على ذلك.", "للحاويات ذات المولد والمتجهة لدول معاملة التبريد: إرسال رقم الحاوية وطلب صورة فتحة التهوية والتأكد من ضبطها بعد الوصول للميناء."]}, {"title": "ثالثاً: أثناء التحميل", "items": ["تفعيل نموذج فحص الحاويات بواسطة مراقب الجودة.", "توصيل الحاوية بالكهرباء طوال فترة التحميل لتبريد جسم الحاوية وطرد الهواء الساخن.", "التأكد من سلامة البالت الخشبي ووضوح ختم HT أو MB حسب نوتس العميل.", "التأكد من اكتمال استيكرات البالت ومطابقة Farm Code ورقم اللوط إن وجد، وعدم تداخل الاستيكرات.", "التأكد من جودة الرص والتبليت والشمبرة وسلامة كراتين الرصات السفلية.", "عند شحن 20 بالت فقط (الفلبين أو اليابان أو حاويات البنوز): تغطية الجزء الظاهر بنهاية الحاوية بعد آخر بالتين بفواصل كرتون لضمان سريان الهواء البارد.", "تثبيت جهاز الحرارة حسب تعليمات الدولة أو العميل؛ وعند عدم وجود تعليمات خاصة يوضع في البالت رقم 10 يميناً، الرصة الثالثة، آخر كرتونة يساراً، مع استيكر Temperature recorder is here.", "وضع استيكر اللوط على كل بالت من أربع جهات، وعلى كل كرتونة في آخر 4 بالتات.", "لروسيا وبيلاروسيا والبرازيل: وضع استيكر العميل على كل كرتونة في آخر 4 بالتات من أربع جهات؛ وفي حالة الصناديق تخصيص 4 بالتات بها استيكر على العمود الداخلي من الجهتين.", "لروسيا وبيلاروسيا وإيطاليا وليتوانيا وأوزباكستان ودول أوروبا في نهاية الموسم: التأكد من وجود 2 بالت وش في نهاية الحاوية.", "الاحتفاظ بعينة Shelf Life لكل عميل من حاوية تحميل اليوم، عينة أو عينتين لكل عميل.", "إنهاء الحاوية ببالتات ذات أختام واضحة عند باب الحاوية.", "عدم خروج الحاوية من الشركة إلا بعد توقيع مراقب جودة الشحن على إذن الخروج."]}, {"title": "رابعاً: توثيق عملية الشحن", "items": ["تصوير الحاوية فارغة مع إظهار سلامة الممرات الأرضية وستائر الهواء وفبرة موزع الهواء والصفاية والأبواب والجلد واللحامات.", "تصوير نظافة الحاوية وعدم وجود بقايا أو مخلفات.", "للدول: سنغافورة، ماليزيا، الصين، هونج كونج، الإمارات، السعودية، فيتنام: إرسال صور الحاوية من الداخل والخارج إلى جروب Photos of Container Body Quality.", "تصوير درجة حرارة الحاوية Set Point.", "تصوير معدل ضبط فتحة التهوية.", "تصوير جميع بالتات الحاوية أثناء التحميل لإظهار جودة البالتات وسلامتها.", "تصوير فيديو لتثبيت وتشغيل جهاز الحرارة مع إظهار رقم الحاوية بعد تشغيل الجهاز ووضعه في الكرتونة أو الصندوق.", "للحاويات التي تتطلب معاملة تبريد: تصوير قراءة حرارة السينسورات والتأكد من ألا تتعدى 1.6°م."]}], "countries": {"روسيا": ["وضع 2 بالت وش في كل حاوية.", "تثبيت جهاز الحرارة في نهاية الحاوية، في البالت على اليمين، بالطبقة الثانية، في الصندوق على يسار البالت.", "التأكيد بالصور على نظافة الحاوية وخلو الأرضيات من أي شيء.", "وضع استيكر اللوط على كل بالت من الأربع جوانب وعلى كل كرتونة في آخر 4 بالتات."], "بيلاروسيا": ["وضع 2 بالت وش في كل حاوية.", "وضع استيكر اللوط على كل بالت من الأربع جوانب وعلى كل كرتونة في آخر 4 بالتات."], "البرازيل": ["تجهيز عينات فحص في الجمارك: كرتونة واحدة خالية من أي عيوب من كل حجم في الحاوية، وتمييزها باستيكر MAPA.", "تثبيت جهاز حرارة واحد في البالت رقم 21 من أعلى وليس داخل كرتونة، مع استيكر سهم يشير إلى موضع الجهاز.", "التأكد من أن درجة حرارة الحاوية 1°م.", "تصوير الحاويات من الداخل والخارج قبل وبعد التحميل وإرسال الصور إلى جروب اللوجيستيك."], "فيتنام": ["تصوير درجة حرارة الحاوية ودرجة حرارة السينسورات قبل خروج الحاوية من المحطة.", "وضع استيكر Sensor على الثلاث بالتات المثبت بها السينسور."], "السعودية": ["تثبيت جهاز حرارة على جسم الحاوية بجوار آخر بالت عند الباب اليمين، في نهاية حدود البالتة من أعلى.", "تثبيت جهاز حرارة في نهاية الحاوية في البالت على اليمين، بالطبقة الثانية، في الكرتونة على يسار البالت.", "اتباع التعليمات العامة لموضع جهاز الحرارة عند انطباقها."], "الصين": ["التأكد من مطابقة اسم وكود المزرعة واسم وكود المحطة لقوائم المحطات والمزارع المعتمدة للحجر الزراعي على الاستيكر.", "وضع جهاز الحرارة طبقاً للتعليمات العامة.", "ضبط فتحة التهوية على 15؛ وإذا تعذر التأكيد، إرسال رقم الحاوية والدولة والعميل لجروب اللوجيستيك دون انتظار الرد بالتحميل، مع إرسال بريد من مدير الجودة يوضح أرقام الحاويات التي أرسلت صور فتحات التهوية والتي لم ترسل لها الصور وطلب صور واضحة.", "التحميل في وجود مندوب الحاوية، والتأكد من وضع السينسورات في البالتات 1 يميناً و18 و19، ووصولها لدرجة الحرارة المطلوبة.", "وضع دكمة بجانب البالتات 1 و2 و17 و18 للسماح بوصول الهواء البارد إلى السينسور؛ توضع السينسورات بجانب البالتات وليس من الأمام باستخدام دكمتين، بشرط تحميل بالت يورو رقم 19.", "تصوير الحاويات من الداخل والخارج قبل وبعد التحميل وإرسال الصور إلى جروب اللوجيستيك.", "وضع استيكر اللوط على كل بالت من الأربع جهات وعلى كل كرتونة في آخر 4 بالتات."], "الفلبين": ["التأكد من مطابقة اسم وكود المزرعة واسم وكود المحطة لقوائم الحجر الزراعي المعتمدة على الاستيكر.", "وضع جهاز الحرارة طبقاً للتعليمات العامة.", "ضبط فتحة التهوية على 15؛ وإذا تعذر التأكيد، إرسال بيانات الحاوية والدولة والعميل لجروب اللوجيستيك دون انتظار الرد بالتحميل، مع إرسال بريد من مدير الجودة يوضح الحاويات التي أرسلت صور فتحاتها والتي لم ترسل لها الصور وطلب صور واضحة.", "التحميل في وجود مندوب الحاوية، والتأكد من وضع السينسورات في البالتات 1 يميناً و18 و19 ووصولها لدرجة الحرارة المطلوبة.", "وضع دكمة بجانب البالتات 1 و2 و17 و18 للسماح بوصول الهواء البارد إلى السينسور؛ توضع السينسورات بجانب البالتات وليس من الأمام باستخدام دكمتين، بشرط تحميل بالت يورو رقم 19.", "تصوير الحاويات من الداخل والخارج قبل وبعد التحميل وإرسال الصور إلى جروب اللوجيستيك.", "وضع استيكر اللوط على كل بالت من الأربع جهات وعلى كل كرتونة في آخر 4 بالتات."], "دول الاتحاد الأوروبي": ["قفل الحاوية بـ 2 بالت وش، وإيقاف التحميل إذا لم تتوفر بالتات الوش لحين تجهيزها.", "التأكد من وضع 4 بالت وش في نهاية الحاوية.", "التأكد من وضع استيكر اللوط على كل بالت من الأربع جهات وعلى كل كرتونة في آخر 4 بالتات."], "إسبانيا": ["التأكد من وضع 4 بالت وش في نهاية الحاوية.", "وضع استيكر اللوط على كل بالت من الأربع جهات وعلى كل كرتونة في آخر 4 بالتات.", "التأكد من أن جميع البالتات بأختام واضحة."], "فرنسا": ["التأكد من وضع 4 بالت وش في نهاية الحاوية.", "وضع استيكر اللوط على كل بالت من الأربع جهات وعلى كل كرتونة في آخر 4 بالتات.", "التأكد من أن جميع البالتات بأختام واضحة."], "هولندا": ["وضع استيكر اللوط على كل بالت من الأربع جهات وعلى كل كرتونة في آخر 4 بالتات.", "وضع 2 بالت وش في نهاية الحاوية بالإضافة إلى آخر رصة في كل بالت.", "التأكد من أن جميع البالتات بأختام واضحة."], "اليابان": ["توفير كراتين إضافية مبردة سريعاً لاستبدال أي كراتين تالفة تظهر أثناء التحميل.", "قبل التحميل، التأكد من أن الحاوية تحقق درجة الحرارة من شاشة البيان، وفحصها جيداً للتأكد من عدم وجود تسريب وسلامة فبرة توزيع الهواء.", "تصوير الحاوية بالكامل من الداخل والخارج.", "فحص البالتات من الخارج لكل كرتونة: الشبك سليم، والكراتين سليمة، والاستيكر سليم، وجميع الكراتين مخصصة لليابان.", "التأكد من أن جميع البالتات أقل من 1.7°م وتصوير كل اختبار بجهاز الحرارة.", "وضع استيكر TEST مقاس 10×5 على كل فتحة تهوية تم اختبار الحرارة من خلالها وأدت إلى ثقب الشبك.", "وضع استيكر Sensor مقاس 10×5 على الكراتين الثلاث الموضوعة بها السينسورات.", "وضع السينسورات بحضور المندوب: الأول في البالت 1 أقصى الشمال بمنتصف البالت بالطبقة الرابعة أو الخامسة؛ الثاني في البالت 10 بالطبقة الرابعة أو الخامسة بالطرف الداخلي؛ والثالث في البالت قبل الأخيرة من يمين الحاوية أقصى يمين البالت بالطبقة الرابعة أو الخامسة.", "غلق الحاوية بسيل وبسيل الحجر الزراعي (رصاصة).", "تصوير الـ 20 بالت أثناء التحميل.", "وضع جهازي حرارة في البالتين 10 و17 على جدار الحاوية أعلى البالت."], "العميل 207069": ["التأكد من وضع 4 بالت وش في نهاية الحاوية.", "التأكد من وجود رقم لوط على كل استيكر.", "وضع جهازي حرارة في البالتين 10 و18.", "التأكد من أن جميع البالتات بأختام واضحة."], "العميل 209019": ["التأكد من أن البالتات السفلية هي البالتات الخاصة بالعميل.", "التأكد من استكمال وزن البنوز أثناء التحميل."], "العميل 105005": ["وضع جهازي حرارة، ويكون ذلك مذكوراً في النوتس الموجودة بجدول الأوردرات."], "العميل 207230": ["وضع جهاز حرارة واحد في نهاية الحاوية."], "أوردرات العملاء التي تطلب شمع بدون شيلاك": ["كتابة LINE 1 على الاستيكر.", "كتابة E903 بدلاً من E904 في بند المطهرات المستخدمة.", "وضع استيكر Shellac Free على جانبين على الأقل من البالت.", "كتابة الحرف C على البنوز.", "فصل الإنتاج داخل الثلاجات بحيث يكون مكانه معروفاً للمسؤولين عن رصيد الثلاجات.", "مسؤول رصيد الثلاجات ومسؤولو الشحن ومراقب جودة الشحن مسؤولون عن منع تداخل الأوردرات، وعدم تحميل أي بنز لا يحمل كل علامات التمييز السابقة.", "توضيح أن كل بالتة من الأوردر Shellac Free أمامها في الباكينج ليست."]}};
+const countrySelect=document.getElementById('country');
+const listRoot=document.getElementById('checklists');
+const searchBox=document.getElementById('search');
+const STORAGE='agrin_shipping_checklist_v1';
+let checked={};
+try{checked=JSON.parse(localStorage.getItem(STORAGE)||'{}')}catch(e){checked={}}
+const allCountryNames=Object.keys(DATA.countries);
+allCountryNames.forEach(name=>{const o=document.createElement('option');o.value=name;o.textContent=name;countrySelect.appendChild(o)});
+function save(){try{localStorage.setItem(STORAGE,JSON.stringify(checked))}catch(e){}}
+function makeItem(text,key){
+ const label=document.createElement('label');label.className='item'+(checked[key]?' done':'');
+ const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!checked[key];cb.addEventListener('change',()=>{checked[key]=cb.checked;label.classList.toggle('done',cb.checked);save();updateProgress()});
+ const span=document.createElement('span');span.className='txt';span.textContent=text;
+ label.append(cb,span);return label;
+}
+function render(){
+ listRoot.innerHTML='';
+ const selected=countrySelect.value, term=searchBox.value.trim().toLocaleLowerCase('ar');
+ let total=0, done=0, visibleKeys=[];
+ const sections=[];
+ if(selected==='__all'||selected==='__general'){
+   DATA.general.forEach((s,i)=>sections.push({title:s.title,items:s.items.map((t,j)=>({text:t,key:'general-'+i+'-'+j}))}));
+ }
+ if(selected==='__all'){
+   allCountryNames.forEach(c=>sections.push({title:'تعليمات خاصة: '+c,items:DATA.countries[c].map((t,j)=>({text:t,key:'country-'+c+'-'+j}))}));
+ } else if(selected!=='__general'){
+   (DATA.countries[selected]||[]).forEach((t,j)=>{});
+   if(DATA.countries[selected])sections.push({title:'تعليمات خاصة: '+selected,items:DATA.countries[selected].map((t,j)=>({text:t,key:'country-'+selected+'-'+j}))});
+ }
+ sections.forEach(s=>{
+   const filtered=s.items.filter(x=>!term||(s.title+' '+x.text).toLocaleLowerCase('ar').includes(term));
+   if(!filtered.length)return;
+   const box=document.createElement('section');box.className='section';
+   const h=document.createElement('h2');h.textContent=s.title;box.appendChild(h);
+   filtered.forEach(it=>{total++;if(checked[it.key])done++;visibleKeys.push(it.key);box.appendChild(makeItem(it.text,it.key))});
+   listRoot.appendChild(box);
+ });
+ if(!listRoot.children.length){const e=document.createElement('div');e.className='section empty';e.textContent='لا توجد تعليمات تطابق البحث.';listRoot.appendChild(e)}
+ updateProgress(total,done);
+ document.getElementById('resetView').onclick=()=>{visibleKeys.forEach(k=>delete checked[k]);save();render()};
+}
+function updateProgress(totalOverride,doneOverride){
+ let total=0,done=0;const selected=countrySelect.value,term=searchBox.value.trim().toLocaleLowerCase('ar');
+ const sections=[];
+ if(selected==='__all'||selected==='__general')DATA.general.forEach((s,i)=>sections.push({title:s.title,items:s.items.map((t,j)=>({text:t,key:'general-'+i+'-'+j}))}));
+ if(selected==='__all')allCountryNames.forEach(c=>sections.push({title:c,items:DATA.countries[c].map((t,j)=>({text:t,key:'country-'+c+'-'+j}))}));
+ else if(selected!=='__general'&&DATA.countries[selected])sections.push({title:selected,items:DATA.countries[selected].map((t,j)=>({text:t,key:'country-'+selected+'-'+j}))});
+ sections.forEach(s=>s.items.filter(x=>!term||(s.title+' '+x.text).toLocaleLowerCase('ar').includes(term)).forEach(x=>{total++;if(checked[x.key])done++}));
+ document.getElementById('progressText').textContent=`تم تنفيذ ${done} من ${total}`;
+ document.getElementById('remainingText').textContent=`المتبقي: ${total-done}`;
+ document.getElementById('meter').style.width=(total?done/total*100:0)+'%';
+}
+countrySelect.addEventListener('change',render);searchBox.addEventListener('input',render);
+document.getElementById('clearAll').addEventListener('click',()=>{if(confirm('هل تريد مسح جميع العلامات المحفوظة لكل الدول؟')){checked={};save();render()}});
+render();
+</script>
+</body></html>
